@@ -53,7 +53,7 @@ public class LocalManagementLoader {
     private static File getAndCreateFile(String folder) {
         File file = Paths.get(folder).toFile();
 
-        if (!file.getParentFile().exists()) {
+        if (!file.exists()) {
             file.mkdirs();
         }
 
