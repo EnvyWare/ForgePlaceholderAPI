@@ -10,6 +10,8 @@ repositories {
 dependencies {
     shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
 
+    implementation group: 'com.google.guava', name: 'guava', version: '23.0'
+
     compileOnly group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '0.1.6'
 }
 
