@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class UtilPlaceholder {
 
-    private static final Pattern PATTERN = Pattern.compile("%([a-zA-Z0-9]+)_([a-zA-Z0-9]+)%");
+    private static final Pattern PATTERN = Pattern.compile("%([a-zA-Z0-9]+)_([a-zA-Z0-9-_]+)%");
 
     /**
      *
