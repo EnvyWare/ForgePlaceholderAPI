@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class UtilPlaceholder {
 
-    private static final Pattern PATTERN = Pattern.compile("%([a-zA-Z0-9]+_)([a-zA-Z0-9]+)%");
+    private static final Pattern PATTERN = Pattern.compile("%([a-zA-Z0-9]+)_([a-zA-Z0-9]+)%");
 
     /**
      *
@@ -50,8 +50,23 @@ public class UtilPlaceholder {
 
         while (matcher.find()) {
             PlaceholderManager<T> manager = (PlaceholderManager<T>) PlaceholderFactory.getPlaceholderManager(matcher.group(1));
+
+            if (manager == null) {
+                continue;
+            }
+
             Matcher internal = PATTERN.matcher(text);
+
+            if (!internal.find()) {
+                continue;
+            }
+
             String replacement = manager.onPlaceholderRequest(player, internal.group(2));
+
+            if (replacement == null) {
+                continue;
+            }
+
             text = new StringBuilder(text).replace(internal.start(0), internal.end(0), replacement).toString();
         }
 
