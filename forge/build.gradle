@@ -38,8 +38,6 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
 
-    shadow group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
-
     shadow group: 'com.github.Pixelmon-Development.API', name: 'commons', version: '0.1.9'
     shadow group: 'com.github.Pixelmon-Development.API', name: 'forge', version: '0.1.9'
 
@@ -51,8 +49,6 @@ dependencies {
     }
 
     shadow project(':api')
-
-    compileOnly 'com.pixelmonmod.pixelmon:Pixelmon-1.12.2-8.2.0-server:1.0'
 }
 
 shadowJar {
