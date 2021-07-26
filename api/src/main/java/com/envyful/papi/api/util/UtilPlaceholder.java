@@ -61,6 +61,10 @@ public class UtilPlaceholder {
                 continue;
             }
 
+            if (!internal.group(1).equalsIgnoreCase(manager.getIdentifier())) {
+                continue;
+            }
+
             String replacement = manager.onPlaceholderRequest(player, internal.group(2));
 
             if (replacement == null) {
