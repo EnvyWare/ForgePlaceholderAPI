@@ -1,5 +1,9 @@
 package com.envyful.papi.api;
 
+import com.envyful.papi.api.manager.extensions.PlaceholderExtension;
+
+import java.util.List;
+
 /**
  *
  * An interface representing a plugin's placeholder manager.
@@ -10,37 +14,11 @@ public interface PlaceholderManager<T> {
 
     /**
      *
-     * The identifying string in a placeholder
-     * I.e. placeholders are always in the format:
-     * $<identifier>_<placeholder>%
+     * Gets descriptive information about the {@link PlaceholderManager}
      *
-     * @return The manager's identifier
+     * @return A list of descriptive messages about the placeholder manager
      */
-    String getIdentifier();
-
-    /**
-     *
-     * Gets the authors of the identifier
-     *
-     * @return The authors
-     */
-    String[] getAuthors();
-
-    /**
-     *
-     * Gets the current version of the placeholder manager
-     *
-     * @return The version
-     */
-    String getVersion();
-
-    /**
-     *
-     * Gets the name of the placeholder manager
-     *
-     * @return The name
-     */
-    String getName();
+    List<String> getDescription();
 
     /**
      *
@@ -51,5 +29,12 @@ public interface PlaceholderManager<T> {
      * @return The data as a string
      */
     String onPlaceholderRequest(T player, String placeholder);
+
+    /**
+     *
+     * Registers the placeholders for this specific manager
+     *
+     */
+    void registerPlaceholder(PlaceholderExtension<T> extension);
 
 }
