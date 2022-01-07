@@ -18,6 +18,8 @@ import java.util.regex.Pattern;
  */
 public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
 
+    private static final Pattern PATTERN = Pattern.compile("%([a-zA-Z0-9]+)_([a-zA-Z0-9-_]+)%");
+
     private final String identifier;
     private final String[] authors;
     private final String version;
@@ -41,6 +43,7 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
         this(identifier, authors, version, name, "%");
     }
 
+    @Override
     public List<String> getDescription() {
         List<String> info = Lists.newArrayList(
                 "§e§l" + this.name + " Placeholder Extension",
@@ -73,16 +76,24 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
     public String onPlaceholderRequest(T player, String placeholder) {
         String[] args = placeholder.split(" ");
         boolean modified = false;
+        Matcher globalMatcher = PATTERN.matcher(placeholder);
 
-        for (String arg : args) {
-            Matcher matcher = this.pattern.matcher(arg);
+        while (globalMatcher.find()) {
+            String replaced = globalMatcher.group();
+            Matcher internal = PATTERN.matcher(replaced);
+
+            if (!internal.find()) {
+                continue;
+            }
+
+            Matcher matcher = this.pattern.matcher(replaced);
 
             if (!matcher.matches()) {
                 continue;
             }
 
             String data = matcher.group(2);
-            String fullPlaceholder = matcher.group(0);
+            String fullPlaceholder = matcher.group();
 
             for (PlaceholderExtension<T> extension : this.extensions) {
                 if (extension.matches(player, data)) {
