@@ -74,7 +74,6 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
 
     @Override
     public String onPlaceholderRequest(T player, String placeholder) {
-        String[] args = placeholder.split(" ");
         boolean modified = false;
         Matcher globalMatcher = PATTERN.matcher(placeholder);
 
