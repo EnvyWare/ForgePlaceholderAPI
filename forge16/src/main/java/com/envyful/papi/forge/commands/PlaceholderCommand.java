@@ -36,10 +36,7 @@ public class PlaceholderCommand {
                 .mainColor("§e")
                 .offColor("§b")
                 .values(new ArrayList<>(PlaceholderFactory.getAllPlaceholderManagers()))
-                .display(placeholderManager -> placeholderManager.getName() + " - " + String.join(
-                        ", ",
-                        placeholderManager.getAuthors()
-                ))
+                .display(placeholderManager -> String.join(System.lineSeparator(), placeholderManager.getDescription()))
                 .send(sender, page);
     }
 }
