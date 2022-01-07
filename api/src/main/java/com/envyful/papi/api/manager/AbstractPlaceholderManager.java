@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  *
  * @param <T> The player class
  */
-public abstract class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
+public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
 
     private final String identifier;
     private final String[] authors;
