@@ -33,7 +33,8 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
         this.version = version;
         this.name = name;
         this.surroundingChar = surroundingChar;
-        this.pattern = Pattern.compile(this.surroundingChar + "(" + this.identifier + "_([a-zA-Z0-9_.&|+\\-#]+)" + this.surroundingChar);
+        this.pattern =
+                Pattern.compile(this.surroundingChar + "(" + this.identifier + "_([a-zA-Z0-9_.&|+\\-#]+))" + this.surroundingChar);
     }
 
     public AbstractPlaceholderManager(String identifier, String[] authors, String version, String name) {
@@ -51,7 +52,7 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
         );
 
         for (PlaceholderExtension<T> extension : this.extensions) {
-            info.add("&b&l" + extension.getName());
+            info.add("§b§l" + extension.getName());
             info.add("  §eDescription:");
 
             for (String s : extension.getDescription()) {
@@ -70,23 +71,27 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
 
     @Override
     public String onPlaceholderRequest(T player, String placeholder) {
-        Matcher matcher = this.pattern.matcher(placeholder);
-
-        if (!matcher.matches()) {
-            return null;
-        }
-
+        String[] args = placeholder.split(" ");
         boolean modified = false;
-        String data = matcher.group(1);
-        String fullPlaceholder = matcher.group(0);
 
-        for (PlaceholderExtension<T> extension : this.extensions) {
-            if (extension.matches(player, data)) {
-                String newData = extension.parse(player, data);
+        for (String arg : args) {
+            Matcher matcher = this.pattern.matcher(arg);
 
-                if (newData != null) {
-                    modified = true;
-                    data = data.replace(fullPlaceholder, newData);
+            if (!matcher.matches()) {
+                continue;
+            }
+
+            String data = matcher.group(2);
+            String fullPlaceholder = matcher.group(0);
+
+            for (PlaceholderExtension<T> extension : this.extensions) {
+                if (extension.matches(player, data)) {
+                    String newData = extension.parse(player, data);
+
+                    if (newData != null) {
+                        modified = true;
+                        placeholder = placeholder.replace(fullPlaceholder, newData);
+                    }
                 }
             }
         }

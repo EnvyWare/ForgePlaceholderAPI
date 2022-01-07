@@ -29,7 +29,11 @@ public class UtilPlaceholder {
     public static <T> String replaceIdentifiers(T player, String text) {
         for (PlaceholderManager<?> allPlaceholderManager : PlaceholderFactory.getAllPlaceholderManagers()) {
             PlaceholderManager<T> castManager = (PlaceholderManager<T>)  allPlaceholderManager;
-            text = castManager.onPlaceholderRequest(player, text);
+            String newText = castManager.onPlaceholderRequest(player, text);
+
+            if (newText != null) {
+                text = newText;
+            }
         }
 
         return text;
