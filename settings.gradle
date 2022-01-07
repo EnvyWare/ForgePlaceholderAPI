@@ -1,3 +1,5 @@
 rootProject.name = 'ForgePlaceholderAPI'
 include 'api'
 include 'forge'
+include 'forge16'
+
