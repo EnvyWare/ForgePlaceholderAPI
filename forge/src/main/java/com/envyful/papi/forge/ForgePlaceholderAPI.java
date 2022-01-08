@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 )
 public class ForgePlaceholderAPI {
 
-    public static final String VERSION = "2.0.0";
+    public static final String VERSION = "2.0.1";
 
     @Mod.EventHandler
     public void onServerStarting(FMLPreInitializationEvent event) {
