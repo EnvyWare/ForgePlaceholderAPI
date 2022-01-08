@@ -114,7 +114,7 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
     }
 
     @Override
-    public void registerPlaceholder(PlaceholderExtension<T> extension) {
+    public <A extends PlaceholderExtension<T>> void registerPlaceholder(A extension) {
         this.extensions.add(extension);
         this.extensions.sort(Comparator.comparing(o -> ((PlaceholderExtension<?>) o).getPriority()).reversed());
     }

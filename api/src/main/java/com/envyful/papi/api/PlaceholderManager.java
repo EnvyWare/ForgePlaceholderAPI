@@ -35,6 +35,6 @@ public interface PlaceholderManager<T> {
      * Registers the placeholders for this specific manager
      *
      */
-    void registerPlaceholder(PlaceholderExtension<T> extension);
+    <A extends PlaceholderExtension<T>> void registerPlaceholder(A extension);
 
 }
