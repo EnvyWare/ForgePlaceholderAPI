@@ -4,9 +4,9 @@ import com.envyful.api.forge.command.ForgeCommandFactory;
 import com.envyful.papi.api.local.LocalManagementLoader;
 import com.envyful.papi.forge.commands.PlaceholderCommand;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 @Mod(ForgePlaceholderAPI.MOD_ID)
@@ -26,9 +26,9 @@ public class ForgePlaceholderAPI {
     }
 
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartedEvent event) {
+    public void onCommandRegistration(RegisterCommandsEvent event) {
         ForgeCommandFactory forgeCommandFactory = new ForgeCommandFactory();
 
-        forgeCommandFactory.registerCommand(event.getServer(), new PlaceholderCommand());
+        forgeCommandFactory.registerCommand(event.getDispatcher(), new PlaceholderCommand());
     }
 }
