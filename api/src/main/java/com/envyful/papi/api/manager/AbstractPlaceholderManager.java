@@ -44,6 +44,21 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
     }
 
     @Override
+    public List<String> getAdminDescription() {
+        List<String> info = Lists.newArrayList();
+
+        info.add(" ");
+        info.add(this.name);
+        info.add(" ");
+
+        for (PlaceholderExtension<T> extension : this.extensions) {
+            info.add(" * " + String.join(", ", extension.getExamples()) + " - " + String.join(", ", extension.getDescription()));
+        }
+
+        return info;
+    }
+
+    @Override
     public List<String> getDescription() {
         List<String> info = Lists.newArrayList(
                 "§e§l" + this.name + " Placeholder Extension",

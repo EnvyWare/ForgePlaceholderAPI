@@ -22,6 +22,14 @@ public interface PlaceholderManager<T> {
 
     /**
      *
+     * Gets github wiki format for extension descriptions
+     *
+     * @return Gets the descriptions
+     */
+    List<String> getAdminDescription();
+
+    /**
+     *
      * Converts a placeholder to it's value based on the passed player
      *
      * @param player The player to replace the placeholder with
