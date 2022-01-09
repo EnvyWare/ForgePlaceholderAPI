@@ -40,8 +40,8 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.22'
 
-    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'commons', version: '1.7.1'
-    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'forge16', version: '1.7.1'
+    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'commons', version: '1.7.8'
+    shadow group: 'com.github.Daniel-Forge-Development.API', name: 'forge16', version: '1.7.8'
 
     shadow project(':api')
 }
