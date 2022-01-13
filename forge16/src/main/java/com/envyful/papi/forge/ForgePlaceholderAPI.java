@@ -2,6 +2,8 @@ package com.envyful.papi.forge;
 
 import com.envyful.api.forge.command.ForgeCommandFactory;
 import com.envyful.papi.api.local.LocalManagementLoader;
+import com.envyful.papi.api.util.UtilPlaceholder;
+import com.envyful.papi.forge.api.ForgePlatformManager;
 import com.envyful.papi.forge.commands.PlaceholderCommand;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -30,5 +32,6 @@ public class ForgePlaceholderAPI {
         ForgeCommandFactory forgeCommandFactory = new ForgeCommandFactory();
 
         forgeCommandFactory.registerCommand(event.getDispatcher(), new PlaceholderCommand());
+        UtilPlaceholder.setPlatformManager(new ForgePlatformManager());
     }
 }
