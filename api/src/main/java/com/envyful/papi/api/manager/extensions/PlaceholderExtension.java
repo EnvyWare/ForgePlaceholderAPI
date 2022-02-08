@@ -49,9 +49,21 @@ public interface PlaceholderExtension<T> {
      *
      * @param player The player
      * @param placeholder The placeholder text
-     * @return The
+     * @return If it matches
      */
     boolean matches(T player, String placeholder);
+
+    /**
+     *
+     * Checks if the data and the player are matching for this extension
+     *
+     * @param object The object
+     * @param placeholder The placeholder text
+     * @return If it matches
+     */
+    default boolean matchesObject(Object object, String placeholder) {
+        return false;
+    }
 
     /**
      *
@@ -62,5 +74,17 @@ public interface PlaceholderExtension<T> {
      * @return The text replacing the entire placeholder with
      */
     String parse(T player, String placeholder);
+
+    /**
+     *
+     * Parses the placeholders in the text for the given object
+     *
+     * @param object The object
+     * @param placeholder The text being parsed
+     * @return The text replacing the entire placeholder with
+     */
+    default String parseObject(Object object, String placeholder) {
+        return null;
+    }
 
 }

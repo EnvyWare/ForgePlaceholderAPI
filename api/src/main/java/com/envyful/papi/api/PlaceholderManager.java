@@ -30,13 +30,14 @@ public interface PlaceholderManager<T> {
 
     /**
      *
-     * Converts a placeholder to it's value based on the passed player
+     * Converts a placeholder to it's value based on the passed object
      *
-     * @param player The player to replace the placeholder with
+     * @param o The object to replace the plcaeholder with
      * @param placeholder The placeholder to replace
      * @return The data as a string
      */
-    String onPlaceholderRequest(T player, String placeholder);
+    String onPlaceholderRequest(Object o, String placeholder);
+
 
     /**
      *

@@ -26,21 +26,23 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
     private final String name;
     private final String surroundingChar;
     private final Pattern pattern;
+    private final Class<T> clazz;
     private final List<PlaceholderExtension<T>> extensions = Lists.newArrayList();
 
     public AbstractPlaceholderManager(String identifier, String[] authors, String version, String name,
-                                      String surroundingChar) {
+                                      String surroundingChar, Class<T> clazz) {
         this.identifier = identifier;
         this.authors = authors;
         this.version = version;
         this.name = name;
         this.surroundingChar = surroundingChar;
+        this.clazz = clazz;
         this.pattern =
                 Pattern.compile(this.surroundingChar + "(" + this.identifier + "_([a-zA-Z0-9_.&|+\\-#]+))" + this.surroundingChar);
     }
 
-    public AbstractPlaceholderManager(String identifier, String[] authors, String version, String name) {
-        this(identifier, authors, version, name, "%");
+    public AbstractPlaceholderManager(String identifier, String[] authors, String version, String name, Class<T> clazz) {
+        this(identifier, authors, version, name, "%", clazz);
     }
 
     @Override
@@ -88,7 +90,51 @@ public class AbstractPlaceholderManager<T> implements PlaceholderManager<T> {
     }
 
     @Override
-    public String onPlaceholderRequest(T player, String placeholder) {
+    public String onPlaceholderRequest(Object o, String placeholder) {
+        if (this.clazz.isAssignableFrom(o.getClass())) {
+            return this.onPlaceholderRequested((T) o, placeholder);
+        }
+
+        boolean modified = false;
+        Matcher globalMatcher = PATTERN.matcher(placeholder);
+
+        while (globalMatcher.find()) {
+            String replaced = globalMatcher.group();
+            Matcher internal = PATTERN.matcher(replaced);
+
+            if (!internal.find()) {
+                continue;
+            }
+
+            Matcher matcher = this.pattern.matcher(replaced);
+
+            if (!matcher.matches()) {
+                continue;
+            }
+
+            String data = matcher.group(2);
+            String fullPlaceholder = matcher.group();
+
+            for (PlaceholderExtension<T> extension : this.extensions) {
+                if (extension.matchesObject(o, data)) {
+                    String newData = extension.parseObject(o, data);
+
+                    if (newData != null) {
+                        modified = true;
+                        placeholder = placeholder.replace(fullPlaceholder, newData);
+                    }
+                }
+            }
+        }
+
+        if (modified) {
+            return placeholder;
+        }
+
+        return null;
+    }
+
+    private String onPlaceholderRequested(T player, String placeholder) {
         boolean modified = false;
         Matcher globalMatcher = PATTERN.matcher(placeholder);
 

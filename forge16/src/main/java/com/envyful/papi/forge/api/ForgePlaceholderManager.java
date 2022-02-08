@@ -12,10 +12,10 @@ public class ForgePlaceholderManager extends AbstractPlaceholderManager<ServerPl
 
     public ForgePlaceholderManager(String identifier, String[] authors, String version, String name,
                                    String surroundingChar) {
-        super(identifier, authors, version, name, surroundingChar);
+        super(identifier, authors, version, name, surroundingChar, clazz);
     }
 
     public ForgePlaceholderManager(String identifier, String[] authors, String version, String name) {
-        super(identifier, authors, version, name);
+        super(identifier, authors, version, name, clazz);
     }
 }
