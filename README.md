@@ -33,3 +33,8 @@ Once you have downloaded the extensions you want, simply put them In `/mods/Forg
 For more details about each extension and available placeholders, head over to [ForgePlaceholderAPI-Extensions](https://github.com/EnvyWare/ForgePlaceholderAPI-Extensions)
 
 Want to use placeholders from ForgePlaceholderAPI In Spigot stuff like DeluxeMenus? Grab [SpigotPAPIBridge](https://github.com/EnvyWare/SpigotPAPIBridge).
+
+# Spigot Clarification
+If you want to use Spigot Placeholders in things like ForgeMenus (Spigot Placeholders in Forge stuff), you will need ForgePlaceholderAPI + SpigotPlaceholders extension
+
+If you want to use Forge Placeholders in things like DeluxeMenus (Forge Placeholders in Spigot stuff), you will need [SpigotPAPIBridge](https://github.com/EnvyWare/SpigotPAPIBridge)
