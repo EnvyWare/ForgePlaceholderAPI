@@ -16,6 +16,7 @@ showAsResourcePack=false
   version="2.0.4"
   displayName="Forge Placeholder API"
   displayURL="https://discord.gg/7vqgtrjDGw"
+  displayTest="IGNORE_SERVER_VERSION"
   credits="Envyful"
   authors="Envyful"
   description='''
