@@ -29,7 +29,7 @@ public class UtilPlaceholder {
     }
 
     /**
-     * Replaces all placeholders for {@param player} in the {@param text} using the {@link PlaceholderFactory} and all
+     * Replaces all placeholders for player in the text using the PlaceholderFactory and all
      * registered placeholders
      *
      * @param player The player replacing in respect to
