@@ -1,5 +1,5 @@
 
-# ForgePlaceholderAPI [![](https://jitpack.io/v/Pixelmon-Development/ForgePlaceholderAPI.svg)](https://jitpack.io/#Pixelmon-Development/ForgePlaceholderAPI)
+# ForgePlaceholderAPI [![](https://jitpack.io/v/Pixelmon-Development/ForgePlaceholderAPI.svg)](https://jitpack.io/#Pixelmon-Development/ForgePlaceholderAPI) [![Downloads](https://img.shields.io/github/downloads/EnvyWare/ForgePlaceholderAPI/total.svg)](https://github.com/EnvyWare/ForgePlaceholderAPI/releases)
 ForgePlaceholderAPI allows for mods/plugins to display data In things such as menus designed In [ForgeMenus](https://github.com/EnvyWare/ForgeMenus). This merely serves as the bridge to facilitate the data exchange.
 # Installation Instructions
 Head over to releases and grab the version that corresponds to the Minecraft server you are running:
