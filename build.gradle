@@ -1,5 +1,6 @@
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'maven-publish'
 
     group = 'com.envyful.papi'
     version = '2.0.5'
@@ -12,9 +13,38 @@ subprojects {
         forgeVersion = "none"
     }
 
+    javadoc {
+        options.encoding = 'UTF-8'
+    }
+
     jar {
         setArchiveBaseName("${rootProject.name}-Forge")
     }
+
+    afterEvaluate {
+        publishing {
+            repositories {
+                maven {
+                    name = "envyware"
+                    url = uri("https://maven.envyware.co.uk/releases")
+                    credentials(PasswordCredentials)
+                    authentication {
+                        basic(BasicAuthentication)
+                    }
+                }
+            }
+            publications {
+                maven(MavenPublication) {
+                    groupId = "com.envyful.papi"
+                    artifactId = project.name
+                    version = project.version
+                    from components.java
+                }
+            }
+        }
+    }
+
+    publish.dependsOn("javadoc")
 
     repositories {
         mavenCentral()
