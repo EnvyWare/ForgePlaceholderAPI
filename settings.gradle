@@ -17,6 +17,6 @@ plugins {
 rootProject.name = 'ForgePlaceholderAPI'
 include 'api'
 //include 'forge'
-include 'forge16'
+//include 'forge16'
 include 'forge20'
 
