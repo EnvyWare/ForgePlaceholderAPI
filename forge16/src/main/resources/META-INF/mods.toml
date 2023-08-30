@@ -5,9 +5,9 @@ modLoader="javafml"
 loaderVersion="[36,)"
 # The license for your mod. This is mandatory and allows for easier comprehension of your redistributive properties.
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
-license="All Rights Reserved"
+license="MIT"
 # A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://github.com/Daniel-Forge-Development/ForgePlaceholderAPI-Extensions/issues"
+issueTrackerURL="https://github.com/EnvyWare/ForgePlaceholderAPI-Extensions/issues"
 # If the mods defined in this file should show as separate resource packs
 showAsResourcePack=false
 
@@ -23,15 +23,15 @@ showAsResourcePack=false
   '''
 
   [[dependencies.forgeplaceholderapi]]
-    modId="forge"
-    mandatory=true
-    versionRange="[36,)"
-    ordering="NONE"
-    side="BOTH"
+  modId="forge"
+  mandatory=true
+  versionRange="[47.1.28,)"
+  ordering="NONE"
+  side="BOTH"
 
   [[dependencies.forgeplaceholderapi]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.16.5,1.17)"
-    ordering="NONE"
-    side="BOTH"
+  modId="minecraft"
+  mandatory=true
+  versionRange="[1.20.1,1.21)"
+  ordering="NONE"
+  side="BOTH"
