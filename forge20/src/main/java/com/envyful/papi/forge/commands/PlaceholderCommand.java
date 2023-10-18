@@ -1,9 +1,9 @@
 package com.envyful.papi.forge.commands;
 
 import com.envyful.api.command.annotate.Command;
-import com.envyful.api.command.annotate.Permissible;
 import com.envyful.api.command.annotate.executor.CommandProcessor;
 import com.envyful.api.command.annotate.executor.Sender;
+import com.envyful.api.command.annotate.permission.Permissible;
 import com.envyful.api.forge.chat.PageBuilder;
 import com.envyful.api.type.UtilParse;
 import com.envyful.papi.api.PlaceholderFactory;
@@ -13,8 +13,8 @@ import net.minecraft.commands.CommandSource;
 import java.util.ArrayList;
 
 @Command(
-        value = "placeholderapi",
-        aliases = {
+        value = {
+                "placeholderapi",
                 "forgeplaceholderapi",
                 "papi",
                 "fpapi"

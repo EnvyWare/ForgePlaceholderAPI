@@ -1,6 +1,7 @@
 package com.envyful.papi.forge;
 
 import com.envyful.api.forge.command.ForgeCommandFactory;
+import com.envyful.api.forge.command.parser.ForgeAnnotationCommandParser;
 import com.envyful.papi.api.local.LocalManagementLoader;
 import com.envyful.papi.api.util.UtilPlaceholder;
 import com.envyful.papi.forge.api.ForgePlatformManager;
@@ -28,9 +29,9 @@ public class ForgePlaceholderAPI {
 
     @SubscribeEvent
     public void onCommandRegistration(RegisterCommandsEvent event) {
-        ForgeCommandFactory forgeCommandFactory = new ForgeCommandFactory();
+        ForgeCommandFactory forgeCommandFactory = new ForgeCommandFactory(ForgeAnnotationCommandParser::new, null);
 
-        forgeCommandFactory.registerCommand(event.getDispatcher(), new PlaceholderCommand());
+        forgeCommandFactory.registerCommand(event.getDispatcher(), forgeCommandFactory.parseCommand(new PlaceholderCommand()));
         UtilPlaceholder.setPlatformManager(new ForgePlatformManager());
     }
 }

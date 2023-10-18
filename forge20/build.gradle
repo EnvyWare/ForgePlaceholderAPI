@@ -4,21 +4,25 @@ plugins {
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-forgeVersion = "1.20.1"
+forgeVersion = "1.20.2"
 
 minecraft {
-    mappings channel: 'official', version: '1.20.1'
+    mappings channel: 'official', version: '1.20.2'
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {}
 
-dependencies {
-    minecraft "net.minecraftforge:forge:1.20.1-47.1.44"
+compileJava.configure {
+    dependsOn ':api:shadowJar'
+}
 
-    shadow (group: 'com.envyful.api', name: 'commons', version: '5.0.3')
-    shadow (group: 'com.envyful.api', name: 'forge20', version: '5.0.3') {
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.2-48.0.30'
+
+    shadow (group: 'com.envyful.api', name: 'commons', version: '5.5.2')
+    shadow (group: 'com.envyful.api', name: 'forge20', version: '5.5.2') {
         transitive = false
     }
 
@@ -33,23 +37,21 @@ shadowJar {
     relocate('org.spongepowered.configurate', 'com.envyful.papi.forge.shade.configurate')
     relocate('org.yaml.snakeyaml', 'com.envyful.papi.forge.shade.snakeyaml')
     relocate('io.leangen.geantyref', 'com.envyful.papi.forge.shade.geantyref')
-    relocate('com.google.gson', 'com.envyful.papi.forge.shade.gson')
     relocate('com.zaxxer', 'com.envyful.papi.forge.shade.hikari')
     relocate('org.slf4j', 'com.envyful.papi.forge.shade.slf4j')
     relocate('com.envyful.api', 'com.envyful.papi.forge.shade.envy.api')
     relocate('org.bstats', 'com.envyful.papi.forge.shade.bstats')
-    relocate('com.google.common', 'com.envyful.papi.forge.shade.guava')
     relocate('org.apache.logging', 'com.envyful.papi.forge.shade.log4j')
     relocate('io.netty', 'com.envyful.papi.forge.shade.netty')
     relocate('io.lettuce', 'com.envyful.papi.forge.shade.lettuce')
     relocate('com.cronutils', 'com.envyful.papi.forge.shade.cronutils')
     relocate('com.cronutils', 'com.envyful.papi.forge.shade.cronutils')
     relocate('com.sun.el', 'com.envyful.papi.forge.shade.sun.el')
-    relocate('javax', 'com.envyful.papi.forge.shade.javax')
-    relocate('javax', 'com.envyful.papi.forge.shade.javax')
     relocate('org.reactivestreams', 'com.envyful.papi.forge.shade.reactivestreams')
     relocate('reactor', 'com.envyful.papi.forge.shade.reactor')
 
+    exclude "com/google/**"
+    exclude "javax/**"
     exclude "**/module-info.class"
     exclude "**/*.properties"
     exclude "**/*.xml"
