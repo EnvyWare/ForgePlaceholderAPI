@@ -1,0 +1,64 @@
+plugins {
+    id 'net.neoforged.moddev' version '2.0.80'
+    id 'com.gradleup.shadow' version '8.3.6'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+forgeVersion = "1.21.1"
+platform = "NeoForge"
+
+neoForge {
+    version = "21.1.162"
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {}
+
+compileJava.configure {
+    dependsOn ':api:shadowJar'
+}
+
+dependencies {
+    shadow (group: 'com.envyful.api', name: 'commons', version: '8.0.6')
+    shadow (group: 'com.envyful.api', name: 'neo21', version: '8.0.6') {
+        transitive = false
+    }
+
+    shadow project(':api')
+}
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+    setArchiveClassifier('')
+    setArchiveBaseName("${rootProject.name}-NeoForge")
+
+    relocate('org.apache.commons.jexl', 'com.envyful.papi.forge.shade.jexl')
+    relocate('org.spongepowered.configurate', 'com.envyful.papi.forge.shade.configurate')
+    relocate('org.yaml.snakeyaml', 'com.envyful.papi.forge.shade.snakeyaml')
+    relocate('io.leangen.geantyref', 'com.envyful.papi.forge.shade.geantyref')
+    relocate('com.zaxxer', 'com.envyful.papi.forge.shade.hikari')
+    relocate('org.slf4j', 'com.envyful.papi.forge.shade.slf4j')
+    relocate('com.envyful.api', 'com.envyful.papi.forge.shade.envy.api')
+    relocate('org.bstats', 'com.envyful.papi.forge.shade.bstats')
+    relocate('io.netty', 'com.envyful.papi.forge.shade.netty')
+    relocate('io.lettuce', 'com.envyful.papi.forge.shade.lettuce')
+    relocate('com.cronutils', 'com.envyful.papi.forge.shade.cronutils')
+    relocate('com.sun.el', 'com.envyful.papi.forge.shade.sun.el')
+    relocate('org.reactivestreams', 'com.envyful.papi.forge.shade.reactivestreams')
+    relocate('reactor', 'com.envyful.papi.forge.shade.reactor')
+    relocate('com.mysql', 'com.envyful.papi.forge.shade.mysql')
+    relocate('uk.co.envyware.helios', 'com.envyful.papi.forge.shade.uk.co.envyware.helios')
+
+    exclude "com/google/**"
+    exclude "org/apache/commons/logging/**"
+    exclude "org/apache/logging/log4j/**"
+    exclude "javax/**"
+    exclude "**/module-info.class"
+    exclude "META-INF/versions/9/**"
+    exclude "META-INF/native-image/**"
+    exclude "META-INF/services/**"
+}
+
+jar.finalizedBy('shadowJar')
+build.finalizedBy('versionedRelease')

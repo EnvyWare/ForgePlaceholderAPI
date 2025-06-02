@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+issueTrackerURL="https://github.com/Daniel-Forge-Development/ForgePlaceholderAPI-Extensions/issues"
+showAsResourcePack=false
+
+[[mods]]
+  modId="forgeplaceholderapi"
+  version="2.0.5"
+  displayName="Forge Placeholder API"
+  displayURL="https://discord.gg/7vqgtrjDGw"
+  credits="Envyful"
+  authors="Envyful"
+  description='''
+  Forge Placeholder API
+  '''
+
+  [[dependencies.forgeplaceholderapi]]
+  modId="neoforge"
+  type="required"
+  versionRange="[21.1.0,)"
+  ordering="NONE"
+  side="BOTH"
+
+[[dependencies.forgeplaceholderapi]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1,1.21.2)"
+ordering="NONE"
+side="BOTH"

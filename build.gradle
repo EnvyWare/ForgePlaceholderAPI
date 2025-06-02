@@ -1,4 +1,5 @@
 subprojects {
+    apply plugin: 'idea'
     apply plugin: 'java'
     apply plugin: 'maven-publish'
 
@@ -11,17 +12,18 @@ subprojects {
 
     ext {
         forgeVersion = "none"
+        platform = "Forge"
     }
 
     javadoc {
         options.encoding = 'UTF-8'
     }
 
-    jar {
-        setArchiveBaseName("${rootProject.name}-Forge")
-    }
-
     afterEvaluate {
+        jar {
+            setArchiveBaseName("${rootProject.name}-${platform}")
+        }
+
         publishing {
             repositories {
                 maven {
@@ -42,6 +44,21 @@ subprojects {
                 }
             }
         }
+
+        task versionedRelease(type: Copy) {
+            dependsOn('shadowJar')
+            delete fileTree('../release/') {
+                include '**/*.jar'
+            }
+            group "build"
+            print("${platform} - ${version} - ${forgeVersion}")
+            from("./build/libs/${rootProject.name}-${platform}-${version}.jar")
+            into('../release/')
+            include '*.jar'
+            rename { String filename ->
+                filename.replace("-${version}.jar", "-${project.version}-${forgeVersion}.jar")
+            }
+        }
     }
 
     publish.dependsOn("javadoc")
@@ -55,27 +72,15 @@ subprojects {
         maven { url = "https://repo.spongepowered.org/maven" }
         maven { url = "https://maven.envyware.co.uk/releases" }
         ivy {
-            setUrl('https://download.nodecdn.net/containers/reforged/server/release')
+            setUrl('https://download.nodecdn.net/containers/reforged/universal/release')
+
             metadataSources {
                 artifact()
+                gradleMetadata()
             }
             patternLayout {
-                artifact('[revision]/[artifact].[ext]')
+                artifact('[artifact].[ext]')
             }
-        }
-    }
-
-    task versionedRelease(type: Copy) {
-        dependsOn('shadowJar')
-        delete fileTree('../release/') {
-            include '**/*.jar'
-        }
-        group "build"
-        from("./build/libs/${rootProject.name}-Forge-${version}.jar")
-        into('../release/')
-        include '*.jar'
-        rename { String filename ->
-            filename.replace("-${version}.jar", "-${project.version}-${forgeVersion}.jar")
         }
     }
 }
